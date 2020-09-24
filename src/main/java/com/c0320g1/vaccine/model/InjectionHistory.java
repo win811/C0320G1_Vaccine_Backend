@@ -39,7 +39,7 @@ public class InjectionHistory {
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
-//    @OneToMany
-//    @JoinColumn(name = "vaccine_id")
-//    private Vaccine vaccine;
+    @ManyToOne
+    @JoinColumn(name = "vaccine_id")
+    private Vaccine vaccine;
 }
