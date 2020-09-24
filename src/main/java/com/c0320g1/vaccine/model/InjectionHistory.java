@@ -31,13 +31,13 @@ public class InjectionHistory {
     @Column(name = "register_type")
     private String registerType;
 
-//    @ManyToOne
-//    @JoinColumn(name =  "account_id")
-//    private Account account;
+    @ManyToOne
+    @JoinColumn(name =  "account_id")
+    private Account account;
 
-//    @ManyToOne
-//    @JoinColumn(name = "patient_id")
-//    private Patient patient;
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
 
 //    @OneToMany
 //    @JoinColumn(name = "vaccine_id")
