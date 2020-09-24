@@ -24,4 +24,8 @@ public class ContactReply {
     @JoinColumn(name = "contact_id") // thông qua khóa ngoại contact_id
     @EqualsAndHashCode.Exclude
     private Contact contact;
+    @ManyToOne
+    @JoinColumn(name = "account_id") // thông qua khóa ngoại account_id
+    @EqualsAndHashCode.Exclude
+    private Account account;
 }
