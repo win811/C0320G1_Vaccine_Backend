@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @Table(name = "daily_schedule")
+//An
 public class DailySchedule {
     @Id
     @Column(name = "id")
@@ -20,6 +21,12 @@ public class DailySchedule {
 
     @Column(name = "calendar_code")
     private String calendarCode;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "note")
+    private String note;
 
     @Column(name = "vaccination_date")
     private LocalDate vaccinationDate;
