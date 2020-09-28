@@ -24,6 +24,7 @@ public class DailySchedule {
     @Column(name = "vaccination_date")
     private LocalDate vaccinationDate;
 
+//    1-nhiều
     @ManyToOne
     @JoinColumn(name = "vaccine_id")
     private Vaccine vaccine ;
