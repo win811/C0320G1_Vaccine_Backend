@@ -21,10 +21,10 @@ public class DailySchedule {
     private long id ;
 
     @Column(name = "start_code")
-    private LocalTime start_Time;
+    private LocalTime startTime;
 
     @Column(name = "end_code")
-    private LocalTime end_Time;
+    private LocalTime endTime;
 
     @Column(name = "address")
     private String address;
