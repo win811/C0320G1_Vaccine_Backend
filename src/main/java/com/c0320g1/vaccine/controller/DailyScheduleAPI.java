@@ -19,6 +19,7 @@ public class DailyScheduleAPI {
     @Autowired
     DailyScheduleService dailyScheduleService;
 
+    //An
     @GetMapping("dailyschedule")
     public ResponseEntity<Page<DailySchedule>> getAllDailySchedule(@PageableDefault(value = 5) Pageable pageable){
         Page<DailySchedule> dailySchedules =  dailyScheduleService.findAll(pageable);

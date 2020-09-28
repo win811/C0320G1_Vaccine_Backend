@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -19,8 +20,11 @@ public class DailySchedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id ;
 
-    @Column(name = "calendar_code")
-    private String calendarCode;
+    @Column(name = "start_code")
+    private LocalTime start_Time;
+
+    @Column(name = "end_code")
+    private LocalTime end_Time;
 
     @Column(name = "address")
     private String address;
