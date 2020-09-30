@@ -22,6 +22,9 @@ public class Vaccine {
     @Column(name = "vaccine_name")
     private String name;
 
+    @Column(name = "vaccine_code")
+    private String code;
+
     @Column(name = "vaccine_category")
     private String category;
 
