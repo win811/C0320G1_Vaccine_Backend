@@ -27,4 +27,9 @@ public class InjectionHistorySerivceImpl implements InjectionHistoryService {
     public Page<InjectionHistory> findAll(Pageable pageable) {
         return injectionHistoryRepository.findAll(pageable);
     }
+
+    @Override
+    public Page<InjectionHistory> findInjectionHistoryByPatientId(Long patientId, Pageable pageable) {
+        return injectionHistoryRepository.findByPatient_Id(patientId, pageable);
+    }
 }

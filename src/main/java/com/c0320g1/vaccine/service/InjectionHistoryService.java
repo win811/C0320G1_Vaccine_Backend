@@ -11,4 +11,6 @@ public interface InjectionHistoryService {
     InjectionHistory findById(Long id);
 
     Page<InjectionHistory> findAll(Pageable pageable);
+
+    Page<InjectionHistory> findInjectionHistoryByPatientId(Long patientId, Pageable pageable);
 }
