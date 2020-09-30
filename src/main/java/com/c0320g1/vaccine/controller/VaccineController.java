@@ -31,12 +31,12 @@ public class VaccineController {
     }
 
     @PutMapping("/export-vaccine")
-    public ResponseEntity<Vaccine> exportVaccine(@RequestParam Long id,@RequestParam Integer newAmount) {
+    public ResponseEntity<Vaccine> exportVaccine(@RequestParam Long id,@RequestParam Integer exportAmount) {
         Vaccine vaccine = vaccineService.findById(id);
         if (vaccine == null) {
             return ResponseEntity.notFound().build();
         }
-        vaccine.setAmount(newAmount);
+        vaccine.setAmount(vaccine.getAmount() - exportAmount);
         return ResponseEntity.ok(vaccineService.save(vaccine));
     }
 

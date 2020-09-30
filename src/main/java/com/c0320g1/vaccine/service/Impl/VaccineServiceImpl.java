@@ -24,7 +24,7 @@ public class VaccineServiceImpl implements VaccineService {
     @Override
     public Page<Vaccine> findBySpec(String name, String category, String country, String inventoryStatus, int page) {
         Sort sort = Sort.by(Sort.Direction.ASC,"expiryDate");
-        Pageable pageable = PageRequest.of(page,2,sort);
+        Pageable pageable = PageRequest.of(page - 1,2,sort);
         Specification<Vaccine> specVaccine = null;
         List<VaccineSpecification> vaccineSpecList = new ArrayList<>();
         vaccineSpecList.add(new VaccineSpecification("name","like",name));
