@@ -1,8 +1,8 @@
 package com.c0320g1.vaccine.service;
 
+import com.c0320g1.vaccine.dto.InjectionHistoryDTO;
 import com.c0320g1.vaccine.model.InjectionHistory;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 public interface InjectionHistoryService {
 
@@ -10,5 +10,6 @@ public interface InjectionHistoryService {
 
     InjectionHistory findById(Long id);
 
-    Page<InjectionHistory> findAll(Pageable pageable);
+    //    Quân
+    Page<InjectionHistoryDTO> search(String fullName, String injected, int page);
 }
