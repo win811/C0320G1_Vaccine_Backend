@@ -38,5 +38,18 @@ public class PatientServiceImpl implements PatientService {
         return null;
     }
 
+    //    CREATE BY ANH ĐỨC
+    @Override
+    public Patient checkPatient(Patient patient) {
+        Patient patient2 = new Patient();
+        patient2 = this.patientRepository.findByBirthdayAndPhoneNumber(patient.getBirthday(), patient.getPhoneNumber());
+        if (patient2.getId() == null) {
+            this.save(patient);
+            patient = this.patientRepository.findByBirthdayAndPhoneNumber(patient.getBirthday(), patient.getPhoneNumber());
+            return patient;
+        }
+        return patient2;
+    }
+
 
 }
