@@ -4,6 +4,7 @@ import com.c0320g1.vaccine.service.ContactReplyService;
 import com.c0320g1.vaccine.service.ContactService;
 import com.c0320g1.vaccine.model.Contact;
 import com.c0320g1.vaccine.model.ContactReply;
+import com.c0320g1.vaccine.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,8 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RestController
@@ -24,6 +24,8 @@ public class ContactAPI {
     private ContactService contactService;
     @Autowired
     private ContactReplyService contactReplyService;
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping("")
     public ResponseEntity<Map<String, Object>> getAllContact(
@@ -45,6 +47,23 @@ public class ContactAPI {
         response.put("currentPage", contactPage.getNumber());
         response.put("totalItems", contactPage.getTotalElements());
         response.put("totalPages", contactPage.getTotalPages());
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Map<String, Object>> getContactById(
+            @PathVariable Long id) {
+        Contact contact = contactService.findById(id);
+        contact.getContactReply().sort(Comparator.comparing(ContactReply::getReplyTime));
+        Map<String, Object> response = new HashMap<>();
+        if (contact == null) {
+            response.put("status", HttpStatus.NOT_FOUND);
+            response.put("message", "Không có phản hồi nào được tìm thấy !");
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+        response.put("status", HttpStatus.OK);
+        response.put("message", "Lấy dữ liệu thành công !");
+        response.put("body", contact);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -75,6 +94,8 @@ public class ContactAPI {
         LocalDateTime localDateTime = LocalDateTime.now();
         contactReply.setReplyTime(localDateTime);
         contactReplyService.save(contactReply);
+//        Send Email
+//        emailService.sendSimpleMessage(contact.getEmail(),contact.getSubject(),contactReply.getReplyText());
         response.put("status", HttpStatus.OK);
         response.put("message", "Gửi phản hồi thành công !");
         return new ResponseEntity<>(response, HttpStatus.OK);

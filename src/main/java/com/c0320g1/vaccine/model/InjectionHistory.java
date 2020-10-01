@@ -20,13 +20,13 @@ public class InjectionHistory {
     private Long id;
 
     @Column(name = "is_injected")
-    private Boolean isInjected;
+    private String isInjected;
 
     @Column(name = "injection_date")
     private LocalDateTime injectionDate;
 
     @Column(name = "reponse_content")
-    private String reponseContent;
+    private String responseContent;
 
     @Column(name = "register_type")
     private String registerType;
