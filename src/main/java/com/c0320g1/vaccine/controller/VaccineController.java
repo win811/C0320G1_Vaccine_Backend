@@ -1,5 +1,4 @@
 package com.c0320g1.vaccine.controller;
-
 import com.c0320g1.vaccine.dto.VaccineListDTO;
 import com.c0320g1.vaccine.model.Vaccine;
 import com.c0320g1.vaccine.service.VaccineService;
@@ -16,6 +15,7 @@ public class VaccineController {
     @Autowired
     VaccineService vaccineService;
 
+    // Thành Long
     @GetMapping("/admin/vaccine-list")
     public ResponseEntity<Page<VaccineListDTO>> getAllVaccine(@RequestParam(name = "code", defaultValue = "") String code,
                                                               @RequestParam(name = "category", defaultValue = "") String category,
@@ -37,18 +37,17 @@ public class VaccineController {
         return ResponseEntity.ok(vaccines);
     }
 
+    // Thành Long
     @GetMapping("/admin/vaccine/{id}")
     public ResponseEntity<Vaccine> getVaccineById(@PathVariable(value = "id") Long id){
         Vaccine vaccine = vaccineService.findById(id);
         return ResponseEntity.ok().body(vaccine);
     }
 
-    @PutMapping("/admin/vaccine-list/{id}")
-    public ResponseEntity<Vaccine> updateVaccine(@PathVariable(value = "id") Long id,
-                                                 @RequestBody Vaccine vaccineUpdate){
-        Vaccine vaccine = vaccineService.findById(id);
-        vaccine.setPrice(vaccineUpdate.getPrice());
-        vaccineService.update(vaccine);
-        return ResponseEntity.ok().body(vaccine);
+    // Thành Long
+    @PutMapping("/admin/vaccine-list/update")
+    public ResponseEntity<Vaccine> updateVaccine(@RequestBody Vaccine vaccineUpdate){
+        vaccineService.update(vaccineUpdate);
+        return ResponseEntity.ok(vaccineUpdate);
     }
 }

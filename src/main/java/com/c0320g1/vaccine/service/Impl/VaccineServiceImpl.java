@@ -24,16 +24,19 @@ public class VaccineServiceImpl implements VaccineService {
     @Autowired
     private VaccineRepository vaccineRepository;
 
+    // Thành Long
     @Override
     public Vaccine save(Vaccine vaccine) {
         return vaccineRepository.save(vaccine);
     }
 
+    // Thành Long
     @Override
     public Vaccine findById(Long id) {
         return vaccineRepository.findById(id).orElse(null);
     }
 
+    // Thành Long
     @Override
     public Page<VaccineListDTO> findVaccineByCriteria(Specification<Vaccine> spec, int page) {
         Pageable pageable = PageRequest.of(page - 1, 5);
@@ -41,6 +44,7 @@ public class VaccineServiceImpl implements VaccineService {
         return transferToNewPage(vaccines);
     }
 
+    // Thành Long
     @Override
     public Specification<Vaccine> getFilter(String code, String category, String country, String minPrice, String maxPrice) {
         List<VaccineSpecification> specs = new ArrayList<>();
@@ -77,6 +81,7 @@ public class VaccineServiceImpl implements VaccineService {
         return null;
     }
 
+    // Thành Long
     @Override
     public Page<VaccineListDTO> findAllVaccine(int page) {
         Pageable pageable = PageRequest.of(page - 1, 5);
@@ -84,11 +89,13 @@ public class VaccineServiceImpl implements VaccineService {
         return transferToNewPage(vaccines);
     }
 
+    // Thành Long
     @Override
     public void update(Vaccine vaccine) {
         vaccineRepository.save(vaccine);
     }
 
+    // Thành Long
     private VaccineListDTO transferToDTO(Vaccine temp) {
         VaccineListDTO vaccine = new VaccineListDTO();
         vaccine.setId(temp.getId());
@@ -101,6 +108,7 @@ public class VaccineServiceImpl implements VaccineService {
         return vaccine;
     }
 
+    // Thành Long
     private Page<VaccineListDTO> transferToNewPage(Page<Vaccine> vaccines) {
         Vaccine temp;
         List<VaccineListDTO> vaccineListDTOS = new ArrayList<>();
