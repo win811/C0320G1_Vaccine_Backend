@@ -21,13 +21,16 @@ import java.util.*;
 @RestController
 @RequestMapping("/api/v1/contact")
 public class ContactAPI {
+    //    CREATE BY ANH ĐỨC
     @Autowired
     private ContactService contactService;
+    //    CREATE BY ANH ĐỨC
     @Autowired
     private ContactReplyService contactReplyService;
+    //    CREATE BY ANH ĐỨC
     @Autowired
     private EmailService emailService;
-
+    //    CREATE BY ANH ĐỨC
     @GetMapping("")
     public ResponseEntity<Map<String, Object>> getAllContact(
             @RequestParam(defaultValue = "0") int page,
@@ -50,7 +53,7 @@ public class ContactAPI {
         response.put("totalPages", contactPage.getTotalPages());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
+    //    CREATE BY ANH ĐỨC
     @GetMapping("/{id}")
     public ResponseEntity<Map<String, Object>> getContactById(
             @PathVariable Long id) {
@@ -67,7 +70,7 @@ public class ContactAPI {
         response.put("body", contact);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
+    //    CREATE BY ANH ĐỨC
     @PostMapping("")
     public ResponseEntity<Map<String, Object>> saveContact(
             @RequestBody Contact contact
@@ -82,7 +85,7 @@ public class ContactAPI {
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
-
+    //    CREATE BY ANH ĐỨC
     @PostMapping("/reply/{id}")
     public ResponseEntity<Map<String, Object>> saveContactReply(
             @RequestBody ContactReply contactReply,
@@ -101,7 +104,7 @@ public class ContactAPI {
         response.put("message", "Gửi phản hồi thành công !");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
+    //    CREATE BY ANH ĐỨC
     @GetMapping("/reply/id")
     public ResponseEntity<Map<String, Object>> endContact(
             @PathVariable("id") Long id

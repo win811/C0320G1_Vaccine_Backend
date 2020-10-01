@@ -16,6 +16,6 @@ public interface PatientService {
 
     //    CREATE BY ANH ĐỨC
     Page<Patient> search(String key, String value, Pageable pageable);
-
+    //    CREATE BY ANH ĐỨC
     Patient checkPatient(Patient patient);
 }

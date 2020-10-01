@@ -16,6 +16,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class Account {
+    //    CREATE BY ANH ĐỨC
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
