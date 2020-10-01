@@ -20,10 +20,10 @@ public class DailySchedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id ;
 
-    @Column(name = "start_code")
+    @Column(name = "start_time")
     private LocalTime startTime;
 
-    @Column(name = "end_code")
+    @Column(name = "end_time")
     private LocalTime endTime;
 
     @Column(name = "address")
