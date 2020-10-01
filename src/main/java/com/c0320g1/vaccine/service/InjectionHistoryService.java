@@ -6,11 +6,15 @@ import org.springframework.data.domain.Pageable;
 
 public interface InjectionHistoryService {
 
+    // Thành Long
     void save (InjectionHistory injectionHistory);
 
+    // Thành Long
     InjectionHistory findById(Long id);
 
+    // Thành Long
     Page<InjectionHistory> findAll(Pageable pageable);
 
+    // Thành Long
     Page<InjectionHistory> findInjectionHistoryByPatientId(Long patientId, Pageable pageable);
 }

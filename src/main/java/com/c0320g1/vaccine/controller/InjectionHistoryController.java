@@ -1,5 +1,4 @@
 package com.c0320g1.vaccine.controller;
-
 import com.c0320g1.vaccine.model.InjectionHistory;
 import com.c0320g1.vaccine.service.InjectionHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ public class InjectionHistoryController {
     @Autowired
     InjectionHistoryService injectionHistoryService;
 
+    // Thành Long
     @GetMapping("/account/injection-history/{patientId}")
     public ResponseEntity<Page<InjectionHistory>> getAll (@PathVariable(value = "patientId") Long patientId,
                                                           @PageableDefault(value = 5) Pageable pageable){

@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InjectionHistoryRepository extends JpaRepository<InjectionHistory, Long> {
+    // Thành Long
     Page<InjectionHistory> findByPatient_Id(Long patientId, Pageable pageable);
 }
