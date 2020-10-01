@@ -28,7 +28,6 @@ public class Contact {
     private LocalDateTime endTime;
     private String status;
     @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
-    // Quan hệ 1-n với đối tượng ở dưới (Person) (1 địa điểm có nhiều người ở)
     // MapopedBy trỏ tới tên biến contact ở trong replyContact.
     @JsonIgnoreProperties("contact")
     private List<ContactReply> contactReply;
