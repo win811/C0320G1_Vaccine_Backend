@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -86,7 +87,7 @@ public class ContactAPI {
     public ResponseEntity<Map<String, Object>> saveContactReply(
             @RequestBody ContactReply contactReply,
             @PathVariable("id") Long id
-    ) {
+    ) throws MessagingException {
         Map<String, Object> response = new HashMap<>();
         Contact contact = contactService.findById(id);
         contact.setStatus("Đang xử lí");
@@ -95,7 +96,7 @@ public class ContactAPI {
         contactReply.setReplyTime(localDateTime);
         contactReplyService.save(contactReply);
 //        Send Email
-//        emailService.sendSimpleMessage(contact.getEmail(),contact.getSubject(),contactReply.getReplyText());
+        emailService.sendSimpleHTMLMessage(contact.getEmail(),contact.getSubject(),contactReply.getReplyText());
         response.put("status", HttpStatus.OK);
         response.put("message", "Gửi phản hồi thành công !");
         return new ResponseEntity<>(response, HttpStatus.OK);
