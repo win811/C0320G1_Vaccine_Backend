@@ -21,6 +21,9 @@ public class VaccineServiceImpl implements VaccineService {
     @Autowired
     private VaccineRepository vaccineRepository;
 
+    /**
+     * Creator : B-Cường
+     */
     @Override
     public Page<Vaccine> findBySpec(String name, String category, String country, String inventoryStatus, int page) {
         Sort sort = Sort.by(Sort.Direction.ASC,"expiryDate");
@@ -41,6 +44,9 @@ public class VaccineServiceImpl implements VaccineService {
         return vaccineRepository.findAll(specVaccine,pageable);
     }
 
+    /**
+     * Creator : B-Cường
+     */
     @Override
     public Vaccine save(Vaccine vaccine) {
         List<Vaccine> vaccineList = vaccineRepository.findAll();
@@ -58,8 +64,21 @@ public class VaccineServiceImpl implements VaccineService {
         return vaccineRepository.save(vaccine);
     }
 
+    /**
+     * Creator : B-Cường
+     */
     @Override
     public Vaccine findById(Long id) {
         return vaccineRepository.findById(id).orElse(null);
     }
+
+    /**
+     * Creator: Duy
+     */
+    @Override
+    public List<Vaccine> getAllVaccine() {
+        return vaccineRepository.findAll();
+    }
+
+
 }
