@@ -43,14 +43,14 @@ public class InjectionHistoryController {
     @PostMapping("injection/registration")
     public ResponseEntity<Map<String, Object>> registration(@RequestBody InjectionHistory injectionHistory) {
         Map<String, Object> response = new HashMap<>();
-
-//        Kiểm tra xem bệnh nhân đã tồn tại hay chưa, nếu chưa sẽ tạo mới bệnh nhân vào database rồi trả về
-        injectionHistory.setPatient(patientService.checkPatient(injectionHistory.getPatient()));
         if (vaccineService.findById(injectionHistory.getVaccine().getId()) == null) {
             response.put("status", HttpStatus.NOT_FOUND);
             response.put("message", "Vắc xin này không tồn tại ");
             return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
         }
+
+//        Kiểm tra xem bệnh nhân đã tồn tại hay chưa, nếu chưa sẽ tạo mới bệnh nhân vào database rồi trả về
+        injectionHistory.setPatient(patientService.checkPatient(injectionHistory.getPatient()));
         this.injectionHistoryService.save(injectionHistory);
         response.put("status", HttpStatus.OK);
         response.put("message", "Đăng kí tiêm chủng theo yêu cầu thành công ! ");
