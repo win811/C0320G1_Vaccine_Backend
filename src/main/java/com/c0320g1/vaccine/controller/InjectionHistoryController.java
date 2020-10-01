@@ -1,6 +1,7 @@
 package com.c0320g1.vaccine.controller;
 
 import com.c0320g1.vaccine.dto.InjectionHistoryDTO;
+import com.c0320g1.vaccine.model.InjectionHistory;
 import com.c0320g1.vaccine.service.InjectionHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,12 @@ public class InjectionHistoryController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return ResponseEntity.ok(injectionHistoryDTO);
+    }
+
+    //An
+    @PostMapping("/injection-save")
+    public void  saveInjection(@RequestBody InjectionHistory injectionHistory){
+        injectionHistoryService.save(injectionHistory);
     }
     }
 

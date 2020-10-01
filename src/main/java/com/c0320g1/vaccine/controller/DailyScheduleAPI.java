@@ -28,4 +28,6 @@ public class DailyScheduleAPI {
         DailySchedule dailySchedules =  dailyScheduleService.findById(id);
         return ResponseEntity.ok(dailySchedules);
     }
+
+
 }
