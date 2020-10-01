@@ -43,6 +43,18 @@ public class VaccineServiceImpl implements VaccineService {
 
     @Override
     public Vaccine save(Vaccine vaccine) {
+        List<Vaccine> vaccineList = vaccineRepository.findAll();
+        Vaccine finalVaccine = vaccineList.get(vaccineList.size() - 1);
+        String finalCode = finalVaccine.getCode();
+        int finalNumber = Integer.parseInt( finalCode.substring( finalCode.length()-4 ) );
+        String tempNumber = "";
+        String nextCode;
+        if (finalNumber < 9) tempNumber = "000";
+        else if (finalNumber < 99) tempNumber = "00";
+        else if (finalNumber < 999) tempNumber = "0";
+        nextCode = "MVX-" + tempNumber + String.valueOf(finalNumber + 1);
+        vaccine.setInventoryStatus("còn");
+        vaccine.setCode(nextCode);
         return vaccineRepository.save(vaccine);
     }
 
