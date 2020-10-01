@@ -1,5 +1,6 @@
 package com.c0320g1.vaccine.controller;
 
+import com.c0320g1.vaccine.model.InjectionHistory;
 import com.c0320g1.vaccine.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,4 +13,5 @@ import org.springframework.web.bind.annotation.RestController;
 public class PatientAPI {
     @Autowired
     private PatientService patientService;
+
 }
