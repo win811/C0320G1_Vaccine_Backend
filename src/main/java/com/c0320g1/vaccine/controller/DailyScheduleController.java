@@ -26,14 +26,16 @@ public class DailyScheduleController {
                                                 @RequestParam(name = "status",defaultValue = "")String status,
                                                 @RequestParam(name = "startDay",defaultValue = "2020-01-01") String startDay,
                                                 @RequestParam(name = "endDay",defaultValue = "2020-12-31")String endDay,
-                                                @PageableDefault(value=6) Pageable pageable){
+                                                @PageableDefault(value=5) Pageable pageable){
         return dailyScheduleService.findAllBySearch(nameVaccine,status,startDay,endDay,pageable);
     }
 
     @GetMapping("/admin/dailySchedule/listInject")
     public Page<InjectionHistory> listInject(@RequestParam(name = "id",defaultValue = "1") Long id,
                                              @PageableDefault(value=7) Pageable pageable){
-        return dailyScheduleService.findAllInject(id,pageable);
+        return dailyScheduleService.findAllInject(id,"định kì",pageable);
     }
+
+
 
 }

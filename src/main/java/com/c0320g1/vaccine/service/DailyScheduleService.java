@@ -12,5 +12,5 @@ import java.util.List;
 public interface DailyScheduleService {
     Page<DailySchedule> findAllBySearch(String nameVaccine, String status, String startDay, String endDay, Pageable pageable);
     List<DailySchedule> findAll();
-    Page<InjectionHistory> findAllInject(Long id,Pageable pageable);
+    Page<InjectionHistory> findAllInject(Long id,String type, Pageable pageable);
 }

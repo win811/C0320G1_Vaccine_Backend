@@ -33,7 +33,7 @@ public class DailyScheduleServiceImpl implements DailyScheduleService {
     }
 
     @Override
-    public Page<InjectionHistory> findAllInject(Long id, Pageable pageable) {
-        return injectionHistoryRepository.findAllByVaccine_Id(id,pageable);
+    public Page<InjectionHistory> findAllInject(Long id,String type, Pageable pageable) {
+        return injectionHistoryRepository.findAllByVaccine_IdAndRegisterType(id,type,pageable);
     }
 }

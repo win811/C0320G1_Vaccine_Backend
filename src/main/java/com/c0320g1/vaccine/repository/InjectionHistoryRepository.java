@@ -10,8 +10,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface InjectionHistoryRepository extends JpaRepository<InjectionHistory, Long> {
     //thong
-    Page<InjectionHistory> findAllByVaccine_Id(Long vaccine_id, Pageable pageable);
+    Page<InjectionHistory> findAllByVaccine_IdAndRegisterType(Long vaccine_id, String registerType, Pageable pageable);
+
     //    Quân
     Page<InjectionHistory> findByPatient_FullNameContainingAndIsInjectedContainingAndRegisterType(String fullName,String isInjected,String registerType,Pageable pageable);
+
+    //thong
+    Page<InjectionHistory> findByPatient_FullNameContainingAndIsInjectedAndRegisterType(String fullName,String isInjected,String registerType,Pageable pageable);
 
 }
