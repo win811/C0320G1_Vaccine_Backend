@@ -18,5 +18,6 @@ public class JwtResponse implements Serializable {
     private  Long accountId;
     private String name;
     private String accountName;
+    private String avatar;
     private Collection<? extends GrantedAuthority> authorities;
 }

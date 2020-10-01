@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RequestMapping("/api/v1")
 public class AccountController {
 
@@ -73,7 +73,7 @@ public class AccountController {
             mailMessage.setSubject("Complete Registration!");
             mailMessage.setFrom("quangtien14dt1bkdn@gmail.com");
             mailMessage.setText("To confirm your account, please click here: "
-                    + "http://localhost:8082/api/v1/confirm-account?token=" + confirmationToken.getConfirmationToken());
+                    + "http://localhost:8080/api/v1/confirm-account?token=" + confirmationToken.getConfirmationToken());
             emailSenderService.sendEmail(mailMessage);
         }
         accountRepository.save(account);
@@ -105,6 +105,6 @@ public class AccountController {
         UserDetails userDetails = userDetailServiceImpl.loadUserByUsername(authentication.getName());
         String jwtToken = jwtTokenUtil.generateToken(userDetails);
         Account accountLogin = accountService.findAccountByUserName(userDetails.getUsername());
-        return ResponseEntity.ok(new JwtResponse(jwtToken, accountLogin.getId(), accountLogin.getFullName(), userDetails.getUsername(), userDetails.getAuthorities()));
+        return ResponseEntity.ok(new JwtResponse(jwtToken, accountLogin.getId(), accountLogin.getFullName(), userDetails.getUsername(),accountLogin.getAvatar(), userDetails.getAuthorities()));
     }
 }

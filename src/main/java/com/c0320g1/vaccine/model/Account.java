@@ -50,6 +50,9 @@ public class Account {
     @Column(name = "birth_day")
     private LocalDate birthDay;
 
+    @Column(name = "avatar_image")
+    private String avatar;
+
     @Column(name = "role")
     @Pattern(regexp = "^(ROLE_USER|ROLE_ADMIN)$")
     private String role ;
