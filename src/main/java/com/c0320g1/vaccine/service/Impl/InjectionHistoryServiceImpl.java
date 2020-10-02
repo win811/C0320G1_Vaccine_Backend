@@ -43,6 +43,12 @@ public class InjectionHistoryServiceImpl implements InjectionHistoryService {
         return mapEntityPageIntoDtoPage(injectionHistories, InjectionHistoryDTO.class);
     }
 
+    //thong
+    @Override
+    public Page<InjectionHistory> findAllBySearch(String namePatient, String isInject, String type, Pageable pageable) {
+        return injectionHistoryRepository.findByPatient_FullNameContainingAndIsInjectedAndRegisterType(namePatient,isInject,type,pageable);
+    }
+
     public <D, T> Page<D> mapEntityPageIntoDtoPage(Page<T> entities, Class<D> dtoClass) {
        ModelMapper modelMapper = new ModelMapper();
         return entities.map(objectEntity -> modelMapper.map(objectEntity, dtoClass));
