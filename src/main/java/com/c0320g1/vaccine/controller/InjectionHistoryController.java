@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200",allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RequestMapping("/api/v1")
 public class InjectionHistoryController {
 
@@ -18,14 +18,17 @@ public class InjectionHistoryController {
 
     //    Quân
     @GetMapping("/injection-list")
-    public ResponseEntity<Page<InjectionHistoryDTO>> getListInjected(@RequestParam(name ="fullName",defaultValue = "") String fullName,
-                                                              @RequestParam(name = "injected",defaultValue = "") String injected,
-                                                              @RequestParam(name = "page",defaultValue = "0") int page){
-        Page<InjectionHistoryDTO> injectionHistoryDTO = injectionHistoryService.search(fullName,injected,page);
-        if(injectionHistoryDTO.isEmpty()){
+    public ResponseEntity<Page<InjectionHistoryDTO>> getListInjected(@RequestParam(name = "fullName", defaultValue = "") String fullName,
+                                                                     @RequestParam(name = "injected", defaultValue = "") String injected,
+                                                                     @RequestParam(name = "page", defaultValue = "0") int page) {
+        Page<InjectionHistoryDTO> injectionHistoryDTO = injectionHistoryService.search(fullName, injected, page);
+        if (injectionHistoryDTO.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return ResponseEntity.ok(injectionHistoryDTO);
     }
-    }
+
+    //Tùng
+
+}
 
