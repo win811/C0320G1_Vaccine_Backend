@@ -12,13 +12,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
-
 @Service
 public class InjectionHistoryServiceImpl implements InjectionHistoryService {
     @Autowired
     InjectionHistoryRepository injectionHistoryRepository;
 
-    Pageable pageableDefault = PageRequest.of(0,4);
+    Pageable pageableDefault = PageRequest.of(0, 4);
 
     @Override
     public void save(InjectionHistory injectionHistory) {
@@ -34,12 +33,12 @@ public class InjectionHistoryServiceImpl implements InjectionHistoryService {
     //    Quân
     @Override
     public Page<InjectionHistoryDTO> search(String fullName, String injected, int page) {
-        if(page>0){
-            Pageable pageable = PageRequest.of(--page,4);
-            Page<InjectionHistory> injectionHistories =  injectionHistoryRepository.findByPatient_FullNameContainingAndIsInjectedContainingAndRegisterType(fullName,injected,"Định kỳ",pageable);
+        if (page > 0) {
+            Pageable pageable = PageRequest.of(--page, 4);
+            Page<InjectionHistory> injectionHistories = injectionHistoryRepository.findByPatient_FullNameContainingAndIsInjectedContainingAndRegisterType(fullName, injected, "Định kỳ", pageable);
             return mapEntityPageIntoDtoPage(injectionHistories, InjectionHistoryDTO.class);
         }
-        Page<InjectionHistory> injectionHistories =  injectionHistoryRepository.findByPatient_FullNameContainingAndIsInjectedContainingAndRegisterType(fullName,injected,"Định kỳ",pageableDefault);
+        Page<InjectionHistory> injectionHistories = injectionHistoryRepository.findByPatient_FullNameContainingAndIsInjectedContainingAndRegisterType(fullName, injected, "Định kỳ", pageableDefault);
         return mapEntityPageIntoDtoPage(injectionHistories, InjectionHistoryDTO.class);
     }
 
@@ -50,7 +49,7 @@ public class InjectionHistoryServiceImpl implements InjectionHistoryService {
     }
 
     public <D, T> Page<D> mapEntityPageIntoDtoPage(Page<T> entities, Class<D> dtoClass) {
-       ModelMapper modelMapper = new ModelMapper();
+        ModelMapper modelMapper = new ModelMapper();
         return entities.map(objectEntity -> modelMapper.map(objectEntity, dtoClass));
     }
 }

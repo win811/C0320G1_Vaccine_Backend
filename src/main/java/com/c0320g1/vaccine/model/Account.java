@@ -16,6 +16,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class Account {
+    //    CREATE BY ANH ĐỨC
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -33,16 +34,7 @@ public class Account {
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     // Quan hệ 1-n với đối tượng ở dưới (Contact) (1 account có nhiều reply )
     // MapopedBy trỏ tới tên biến account ở trong replyContact.
+    @JsonIgnoreProperties("account")
     private List<ContactReply> contactReply;
 
-    @JsonIgnoreProperties("account")
-    public List<ContactReply> getContactReply() {
-        return contactReply;
-    }
-
-
-    @JsonProperty
-    public void setContactReply(ContactReply contactReply) {
-        this.contactReply = (List<ContactReply>) contactReply;
-    }
 }

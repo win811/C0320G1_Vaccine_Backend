@@ -5,9 +5,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface ContactService {
+    //    CREATE BY ANH ĐỨC
     void save(Contact contact);
-
+    //    CREATE BY ANH ĐỨC
     Contact findById(Long id);
-
+    //    CREATE BY ANH ĐỨC
     Page<Contact> findAll(Pageable pageable);
 }
