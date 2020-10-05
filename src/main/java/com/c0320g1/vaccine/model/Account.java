@@ -26,7 +26,7 @@ public class Account {
     @Size(min = 6)
     private String username;
 
-    @Column(name = "password", nullable = false, unique = true)
+    @Column(name = "password", nullable = false)
     @Size(min = 8)
     private String password;
 
