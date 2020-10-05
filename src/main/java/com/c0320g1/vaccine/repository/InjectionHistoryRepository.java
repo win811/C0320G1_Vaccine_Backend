@@ -7,8 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface InjectionHistoryRepository extends JpaRepository<InjectionHistory,Long> {
 
-    //    Quân
+public interface InjectionHistoryRepository extends JpaRepository<InjectionHistory, Long> {
+    // Thành Long
+    Page<InjectionHistory> findByPatient_Id(Long patientId, Pageable pageable);
+    //Quân
     Page<InjectionHistory> findByPatient_FullNameContainingAndIsInjectedContainingAndRegisterType(String fullName,String isInjected,String registerType,Pageable pageable);
+
 }
