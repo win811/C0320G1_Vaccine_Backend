@@ -16,10 +16,10 @@ public class InjectionHistoryController {
     InjectionHistoryService injectionHistoryService;
 
     // Thành Long
-    @GetMapping("/account/injection-history/{patientId}")
-    public ResponseEntity<Page<InjectionHistory>> getAll (@PathVariable(value = "patientId") Long patientId,
+    @GetMapping("/account/injection-history/{accountId}")
+    public ResponseEntity<Page<InjectionHistory>> getAllInjectionHistoryByAccountId (@PathVariable(value = "accountId") Long accountId,
                                                           @PageableDefault(value = 5) Pageable pageable){
-        Page<InjectionHistory> injectionHistories = injectionHistoryService.findInjectionHistoryByPatientId(patientId, pageable);
+        Page<InjectionHistory> injectionHistories = injectionHistoryService.findInjectionHistoryByAccountId(accountId, pageable);
         return ResponseEntity.ok(injectionHistories);
     }
 }

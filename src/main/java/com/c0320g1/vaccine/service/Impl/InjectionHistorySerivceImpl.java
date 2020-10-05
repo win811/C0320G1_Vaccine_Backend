@@ -32,7 +32,7 @@ public class InjectionHistorySerivceImpl implements InjectionHistoryService {
 
     // Thành Long
     @Override
-    public Page<InjectionHistory> findInjectionHistoryByPatientId(Long patientId, Pageable pageable) {
-        return injectionHistoryRepository.findByPatient_Id(patientId, pageable);
+    public Page<InjectionHistory> findInjectionHistoryByAccountId(Long accountId, Pageable pageable) {
+        return injectionHistoryRepository.findByAccount_Id(accountId, pageable);
     }
 }
