@@ -40,4 +40,5 @@ public class DailySchedule {
     @JoinColumn(name = "vaccine_id")
     private Vaccine vaccine ;
 
+
 }

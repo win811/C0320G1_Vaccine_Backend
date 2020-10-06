@@ -1,5 +1,6 @@
 package com.c0320g1.vaccine.service.Impl;
 
+import com.c0320g1.vaccine.dto.DailyScheduleDTO;
 import com.c0320g1.vaccine.dto.InjectionHistoryDTO;
 import com.c0320g1.vaccine.model.InjectionHistory;
 import com.c0320g1.vaccine.repository.InjectionHistoryRepository;
@@ -23,6 +24,7 @@ public class InjectionHistoryServiceImpl implements InjectionHistoryService {
     @Override
     public void save(InjectionHistory injectionHistory) {
         injectionHistoryRepository.save(injectionHistory);
+
     }
 
     @Override

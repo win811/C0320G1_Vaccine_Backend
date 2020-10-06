@@ -18,4 +18,7 @@ public interface PatientService {
     Page<Patient> search(String key, String value, Pageable pageable);
 
     Patient checkPatient(Patient patient);
+
+    // AN
+    boolean chekedPatient(Patient patient);
 }

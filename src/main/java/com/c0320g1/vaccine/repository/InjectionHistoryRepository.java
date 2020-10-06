@@ -11,5 +11,4 @@ public interface InjectionHistoryRepository extends JpaRepository<InjectionHisto
 
     //    Quân
     Page<InjectionHistory> findByPatient_FullNameContainingAndIsInjectedContainingAndRegisterType(String fullName,String isInjected,String registerType,Pageable pageable);
-
 }

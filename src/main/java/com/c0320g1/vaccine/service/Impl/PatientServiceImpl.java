@@ -51,5 +51,12 @@ public class PatientServiceImpl implements PatientService {
         return patient2;
     }
 
+    @Override
+    public boolean chekedPatient(Patient patient) {
+        Patient patient2 = new Patient();
+        patient2 = this.patientRepository.findByBirthdayAndPhoneNumber(patient.getBirthday(),patient.getPhoneNumber());
+        return patient2 == null;
+    }
+
 
 }

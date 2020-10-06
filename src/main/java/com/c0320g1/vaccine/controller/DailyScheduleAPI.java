@@ -23,6 +23,7 @@ public class DailyScheduleAPI {
         return ResponseEntity.ok(dailySchedules);
     }
 
+    //An
     @GetMapping("info-vaccine/{id}")
     public ResponseEntity<DailySchedule> getInfoVaccine(@PathVariable long id){
         DailySchedule dailySchedules =  dailyScheduleService.findById(id);
