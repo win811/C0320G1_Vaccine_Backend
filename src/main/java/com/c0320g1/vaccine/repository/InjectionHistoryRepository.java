@@ -18,4 +18,6 @@ public interface InjectionHistoryRepository extends JpaRepository<InjectionHisto
     //thong
     Page<InjectionHistory> findByPatient_FullNameContainingAndIsInjectedAndRegisterType(String fullName,String isInjected,String registerType,Pageable pageable);
 
+    // Thành Long
+    Page<InjectionHistory> findByAccount_Id(Long accountId, Pageable pageable);
 }

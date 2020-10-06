@@ -7,6 +7,8 @@ import com.c0320g1.vaccine.service.PatientService;
 import com.c0320g1.vaccine.service.VaccineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,5 +59,12 @@ public class InjectionHistoryController {
         return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
 
     }
-}
 
+    // Thành Long
+    @GetMapping("/account/injection-history/{accountId}")
+    public ResponseEntity<Page<InjectionHistory>> getAllInjectionHistoryByAccountId (@PathVariable(value = "accountId") Long accountId,
+                                                                                     @PageableDefault(value = 5) Pageable pageable){
+        Page<InjectionHistory> injectionHistories = injectionHistoryService.findInjectionHistoryByAccountId(accountId, pageable);
+        return ResponseEntity.ok(injectionHistories);
+    }
+}

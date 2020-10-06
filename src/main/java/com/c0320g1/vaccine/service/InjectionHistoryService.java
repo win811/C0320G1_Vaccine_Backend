@@ -7,8 +7,10 @@ import org.springframework.data.domain.Pageable;
 
 public interface InjectionHistoryService {
 
+    // Thành Long
     void save (InjectionHistory injectionHistory);
 
+    // Thành Long
     InjectionHistory findById(Long id);
 
     //    Quân
@@ -16,4 +18,9 @@ public interface InjectionHistoryService {
 
     // thong
     Page<InjectionHistory> findAllBySearch(String namePatient, String isInject, String type, Pageable pageable);
+    // Thành Long
+    Page<InjectionHistory> findAll(Pageable pageable);
+
+    // Thành Long
+    Page<InjectionHistory> findInjectionHistoryByAccountId(Long accountId, Pageable pageable);
 }
