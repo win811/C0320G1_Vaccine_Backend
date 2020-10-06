@@ -20,14 +20,17 @@ public class PatientAPI {
     @Autowired
     private PatientRepository patientRepository;
 
-    //AN - thêm benh nhan tiem dịnh kỳ
+    //AN - Thêm benh nhan tiem dịnh kỳ
     @PostMapping("/create-patient")
     public ResponseEntity<Patient> createPatiendt(@RequestBody Patient patient) {
+        List<Patient> patients = patientRepository.findAll();
+        Patient patientCode = patients.get(patients.size() - 1);
         if (patientService.chekedPatient(patient)) {
+            patient.setCode(patientCode.getId());
             patientService.save(patient);
             return ResponseEntity.ok(patient);
         }
-        Patient paten2 = patientRepository.findByBirthdayAndPhoneNumber(patient.getBirthday(),patient.getPhoneNumber());
+        Patient paten2 = patientRepository.findByBirthdayAndPhoneNumber(patient.getBirthday(), patient.getPhoneNumber());
         return ResponseEntity.ok(paten2);
     }
 }
