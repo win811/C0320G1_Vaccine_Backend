@@ -14,6 +14,7 @@ public class VaccineController {
     @Autowired
     private VaccineService vaccineService;
 
+    // Cường
     @GetMapping("/vaccine-storage")
     public ResponseEntity<Page<Vaccine>> getVaccineStorage(@RequestParam(defaultValue = "") String name,
                                                            @RequestParam(defaultValue = "") String category,
@@ -25,11 +26,13 @@ public class VaccineController {
         return ResponseEntity.ok(vaccinePage);
     }
 
+    // Cường
     @PostMapping("/import-vaccine")
     public ResponseEntity<Vaccine> importVaccine(@RequestBody Vaccine vaccine) {
         return ResponseEntity.ok(vaccineService.save(vaccine));
     }
 
+    // Cường
     @PutMapping("/export-vaccine")
     public ResponseEntity<Vaccine> exportVaccine(@RequestParam Long id,@RequestParam Integer exportAmount) {
         Vaccine vaccine = vaccineService.findById(id);
