@@ -106,6 +106,7 @@ public class InjectionHistoryController {
         }
 //        Kiểm tra xem bệnh nhân đã tồn tại hay chưa, nếu chưa sẽ tạo mới bệnh nhân vào database rồi trả về
         injectionHistory.setPatient(patientService.checkPatient(injectionHistory.getPatient()));
+        injectionHistory.setRegisterType("yêu cầu");
         this.injectionHistoryService.save(injectionHistory);
         response.put("status", HttpStatus.OK);
         response.put("message", "Đăng kí tiêm chủng theo yêu cầu thành công ! ");

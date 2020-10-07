@@ -27,7 +27,7 @@ public class Patient {
     private String email;
     private Boolean status;
 
-    public void setCode(Long code) {
-        this.code = "BN-"+1000+ code;
-    }
+//    public void setCode(Long code) {
+//        this.code = "BN-"+1000+ code;
+//    }
 }

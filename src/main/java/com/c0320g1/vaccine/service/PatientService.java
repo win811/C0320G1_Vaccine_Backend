@@ -37,4 +37,6 @@ public interface PatientService {
     Patient findById(Long id);
      boolean chekedPatient(Patient patient);
 
+    Boolean checkCode(String code);
+
 }
