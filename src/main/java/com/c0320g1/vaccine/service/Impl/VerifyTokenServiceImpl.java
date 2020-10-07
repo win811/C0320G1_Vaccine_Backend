@@ -5,12 +5,14 @@ import com.c0320g1.vaccine.repository.VerifyTokenRepository;
 import com.c0320g1.vaccine.service.VerifyTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Date;
 
 @Service
+@Transactional
 public class VerifyTokenServiceImpl implements VerifyTokenService {
     @Autowired
     private VerifyTokenRepository verifyTokenRepository;
