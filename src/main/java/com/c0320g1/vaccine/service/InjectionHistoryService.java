@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public interface InjectionHistoryService {
 
@@ -17,6 +18,12 @@ public interface InjectionHistoryService {
 
     //    Quân
 //    Page<InjectionHistoryDTO> search(String fullName, String injected, int page);
+
+
+    Page<InjectionHistoryDTO> search(String fullName, String injected, int page);
+
+    // thong
+    Page<InjectionHistory> findAllBySearch(String namePatient, String isInject, String type, Pageable pageable);
 
     // Thành Long
     Page<InjectionHistory> findAll(Pageable pageable);

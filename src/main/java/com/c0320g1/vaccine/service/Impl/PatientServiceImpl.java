@@ -17,11 +17,51 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class PatientServiceImpl implements PatientService {
+    //    CREATE BY ANH ĐỨC
     @Autowired
-    PatientRepository patientRepository;
+    private PatientRepository patientRepository;
+
+    //    CREATE BY ANH ĐỨC
+    @Override
+    public Page<Patient> findAll(Pageable pageable) {
+        return patientRepository.findAll(pageable);
+    }
+
+    //    CREATE BY ANH ĐỨC
+    @Override
+    public void save(Patient patient) {
+        patientRepository.save(patient);
+    }
+
+    //    CREATE BY ANH ĐỨC
+    @Override
+    public Page<Patient> search(String key, String value, Pageable pageable) {
+        return null;
+    }
+
+    //    CREATE BY ANH ĐỨC
+    @Override
+    public Patient checkPatient(Patient patient) {
+        Patient patient2 = new Patient();
+        patient2 = this.patientRepository.findByBirthdayAndPhoneNumber(patient.getBirthday(), patient.getPhoneNumber());
+        if (patient2 != null) {
+            return patient2;
+        }
+        Random random = new Random();
+        String number = String.valueOf(random.nextInt(8999)+1000);
+        patient.setCode("BN-" + number);
+        while (checkCode(patient.getCode())) {
+            patient.setCode("BN-" + number);}
+        patient.setStatus(true);
+        this.save(patient);
+        patient = this.patientRepository.findByBirthdayAndPhoneNumber(patient.getBirthday(), patient.getPhoneNumber());
+        return patient;
+
+    }
 
     // Thành Long
     @Override
@@ -37,11 +77,11 @@ public class PatientServiceImpl implements PatientService {
         List<PatientSpecification> specs = new ArrayList<>();
         Specification<Patient> spec;
         // search theo code
-        if(!"".equals(code) && !"undefined".equals(code)) {
+        if (!"".equals(code) && !"undefined".equals(code)) {
             specs.add(new PatientSpecification(new SearchCriteria("code", "like", code)));
         }
         // search theo fullName
-        if(!"".equals(fullName) && !"undefined".equals(fullName) ) {
+        if (!"".equals(fullName) && !"undefined".equals(fullName)) {
             specs.add(new PatientSpecification(new SearchCriteria("fullName", "like", fullName)));
         }
         if (specs.size() != 0) {
@@ -109,4 +149,18 @@ public class PatientServiceImpl implements PatientService {
         Page<PatientListDTO> _patient = new PageImpl<>(patientListDTOS, patients.getPageable(), patients.getTotalElements());
         return _patient;
     }
+
+    @Override
+    public boolean chekedPatient(Patient patient) {
+        Patient patient2 = new Patient();
+        patient2 = this.patientRepository.findByBirthdayAndPhoneNumber(patient.getBirthday(), patient.getPhoneNumber());
+        return patient2 == null;
+    }
+
+    @Override
+    public Boolean checkCode(String code) {
+        return patientRepository.findByCode(code);
+    }
+
+
 }

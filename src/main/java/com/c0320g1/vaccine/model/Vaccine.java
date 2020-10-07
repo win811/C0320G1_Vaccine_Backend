@@ -22,7 +22,7 @@ public class Vaccine {
     @Column(name = "vaccine_name")
     private String name;
 
-    @Column(name = "vaccine_code")
+    @Column(name= "vaccine_code")
     private String code;
 
     @Column(name = "vaccine_category")
@@ -52,11 +52,10 @@ public class Vaccine {
     @Column(name = "vaccine_limit_age")
     private Double limitAge;
 
-    @Column(name = "vaccine_inventory_status")
-    private String inventoryStatus;
-
     @Column(name = "vaccine_price")
     private Double price;
 
+    @Column(name = "vaccine_inventory_status")
+    private String inventoryStatus;
 
 }

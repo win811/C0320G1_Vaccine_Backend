@@ -15,4 +15,6 @@ public class InjectionHistoryDTO {
     private LocalDateTime injectionDate;
     private Patient patient;
     private String isInjected;
+
+
 }

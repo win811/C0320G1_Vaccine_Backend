@@ -8,12 +8,42 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200",allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/v1")
 public class VaccineController {
+
     @Autowired
-    VaccineService vaccineService;
+    private VaccineService vaccineService;
+
+    // Cường
+    @GetMapping("/vaccine-storage")
+    public ResponseEntity<Page<Vaccine>> getVaccineStorage(@RequestParam(defaultValue = "") String name,
+                                                           @RequestParam(defaultValue = "") String category,
+                                                           @RequestParam(defaultValue = "") String country,
+                                                           @RequestParam(defaultValue = "") String inventoryStatus,
+                                                           @RequestParam(defaultValue = "0") int page
+    ) {
+        Page<Vaccine> vaccinePage = this.vaccineService.findBySpec(name,category,country,inventoryStatus,page);
+        return ResponseEntity.ok(vaccinePage);
+    }
+
+    // Cường
+    @PostMapping("/import-vaccine")
+    public ResponseEntity<Vaccine> importVaccine(@RequestBody Vaccine vaccine) {
+        return ResponseEntity.ok(vaccineService.save(vaccine));
+    }
+
+    // Cường
+    @PutMapping("/export-vaccine")
+    public ResponseEntity<Vaccine> exportVaccine(@RequestParam Long id,@RequestParam Integer exportAmount) {
+        Vaccine vaccine = vaccineService.findById(id);
+        if (vaccine == null) {
+            return ResponseEntity.notFound().build();
+        }
+        vaccine.setAmount(vaccine.getAmount() - exportAmount);
+        return ResponseEntity.ok(vaccineService.save(vaccine));
+    }
 
     // Thành Long
     @GetMapping("/admin/vaccine-list")
@@ -50,4 +80,5 @@ public class VaccineController {
         vaccineService.update(vaccineUpdate);
         return ResponseEntity.ok(vaccineUpdate);
     }
+
 }

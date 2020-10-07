@@ -8,26 +8,27 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-// Thành Long
+//Cường
 public class VaccineSpecification implements Specification<Vaccine> {
-    private final SearchCriteria criteria;
 
-    public VaccineSpecification(SearchCriteria criteria) {
-        this.criteria = criteria;
+    private String key;
+    private String operation;
+    private String value;
+
+    public VaccineSpecification() {
+    }
+
+    public VaccineSpecification(String key, String operation, String value) {
+        this.key = key;
+        this.operation = operation;
+        this.value = value;
     }
 
     @Override
-    public Predicate toPredicate(Root<Vaccine> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        if (criteria.getOperation().equalsIgnoreCase("like")) {
-            // value like %chuỗi_tìm_kiếm%
-            return criteriaBuilder.like(root.get(criteria.getKey()), "%" + criteria.getValues().get(0) + "%");
-        } else if (criteria.getOperation().equalsIgnoreCase("between")) {
-            // value between moneyFrom and moneyTo
-            Double moneyFrom = Double.valueOf(criteria.getValues().get(0));
-            Double moneyTo = Double.valueOf(criteria.getValues().get(1));
-            return criteriaBuilder.between(root.get(criteria.getKey()), moneyFrom, moneyTo);
-        } else {
-            return null;
+    public Predicate toPredicate(Root<Vaccine> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+        if (this.operation.equalsIgnoreCase("like")) {
+            return criteriaBuilder.like(root.get(this.key), "%" + this.value + "%");
         }
+        return null;
     }
 }
