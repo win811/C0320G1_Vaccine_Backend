@@ -22,6 +22,5 @@ public interface InjectionHistoryService {
     Page<InjectionHistory> findAll(Pageable pageable);
 
     // Thành Long
-    Page<InjectionHistory> findInjectionHistoryByPatientId(Long patientId, Pageable pageable);
-
+    Page<InjectionHistory> findInjectionHistoryByAccountId(Long accountId, Pageable pageable);
 }

@@ -10,8 +10,10 @@ import org.springframework.stereotype.Repository;
 
 public interface InjectionHistoryRepository extends JpaRepository<InjectionHistory, Long> {
     // Thành Long
-    Page<InjectionHistory> findByPatient_Id(Long patientId, Pageable pageable);
+    Page<InjectionHistory> findByAccount_Id(Long accountId, Pageable pageable);
     //Quân
     Page<InjectionHistory> findByPatient_FullNameContainingAndIsInjectedContainingAndRegisterType(String fullName,String isInjected,String registerType,Pageable pageable);
+
+
 
 }
