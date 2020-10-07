@@ -1,5 +1,6 @@
 package com.c0320g1.vaccine.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -63,4 +65,8 @@ public class Account {
     @Column(name = "confirm_status")
     private boolean confirmStatus = false;
 
-}
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    // Quan hệ 1-n với đối tượng ở dưới (Contact) (1 account có nhiều reply )
+    // MapopedBy trỏ tới tên biến account ở trong replyContact.
+    @JsonIgnoreProperties("account")
+    private List<ContactReply> contactReply;}
