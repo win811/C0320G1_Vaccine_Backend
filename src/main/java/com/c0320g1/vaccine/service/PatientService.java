@@ -35,4 +35,6 @@ public interface PatientService {
 
     // Thành Long
     Patient findById(Long id);
+     boolean chekedPatient(Patient patient);
+
 }
