@@ -8,16 +8,17 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+//Cường
 public class VaccineSpecification implements Specification<Vaccine> {
 
     private String key;
     private String operation;
     private String value;
 
-    public VaccineSpecification(){
+    public VaccineSpecification() {
     }
 
-    public VaccineSpecification(String key,String operation,String value) {
+    public VaccineSpecification(String key, String operation, String value) {
         this.key = key;
         this.operation = operation;
         this.value = value;
@@ -26,7 +27,7 @@ public class VaccineSpecification implements Specification<Vaccine> {
     @Override
     public Predicate toPredicate(Root<Vaccine> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
         if (this.operation.equalsIgnoreCase("like")) {
-            return criteriaBuilder.like(root.get(this.key),"%" + this.value + "%");
+            return criteriaBuilder.like(root.get(this.key), "%" + this.value + "%");
         }
         return null;
     }

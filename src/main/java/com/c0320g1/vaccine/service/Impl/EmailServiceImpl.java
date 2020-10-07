@@ -31,7 +31,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void sendSimpleHTMLMessage(String to, String subject, String text) throws MessagingException {
-        SimpleMailMessage msg = new SimpleMailMessage();
+
         LocalDate timeNow = LocalDate.now();
         String htmlMsg = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"\n" +
                 "  \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n" +
@@ -560,7 +560,7 @@ public class EmailServiceImpl implements EmailService {
         // Prepare message using a Spring helper
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, "UTF-8");
-        msg.setFrom("Trung Tâm Tiêm Chủng GPS <CGBVN@gmail.com>");
+        mimeMessageHelper.setFrom("Trung Tâm Tiêm Chủng GPS <CGBVN@gmail.com>");
         mimeMessageHelper.setSubject(subject);
         mimeMessageHelper.setTo(to);
         // Create the HTML body using Thymeleaf

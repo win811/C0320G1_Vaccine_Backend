@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AccountImpl implements AccountService {
+public class AccountServiceImpl implements AccountService {
+
     @Autowired
     private AccountRepository accountRepository;
 
@@ -20,4 +21,20 @@ public class AccountImpl implements AccountService {
     public Account findById(Long id) {
         return accountRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public Account findAccountByEmail(String email) {
+        return accountRepository.findByEmail(email);
+    }
+
+    @Override
+    public void saveAccount(Account account) {
+        accountRepository.save(account);
+    }
+
+    @Override
+    public Account findAccountByUserName(String username) {
+        return accountRepository.findByUsername(username);
+    }
+
 }
