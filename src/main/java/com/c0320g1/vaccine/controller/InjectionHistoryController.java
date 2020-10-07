@@ -4,6 +4,13 @@ import com.c0320g1.vaccine.dto.InjectionHistoryDTO;
 import com.c0320g1.vaccine.model.InjectionHistory;
 import com.c0320g1.vaccine.model.VerifyToken;
 import com.c0320g1.vaccine.service.*;
+import com.c0320g1.vaccine.model.InjectionHistory;
+import com.c0320g1.vaccine.model.Patient;
+import com.c0320g1.vaccine.repository.AccountRepository;
+import com.c0320g1.vaccine.repository.PatientRepository;
+import com.c0320g1.vaccine.repository.VaccineRepository;
+import com.c0320g1.vaccine.service.InjectionHistoryService;
+import com.c0320g1.vaccine.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,11 +25,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RequestMapping("/api/v1")
 public class InjectionHistoryController {
-    //    CREATE BY ANH ĐỨC
+
     @Autowired
     InjectionHistoryService injectionHistoryService;
     //    CREATE BY ANH ĐỨC
@@ -35,6 +48,15 @@ public class InjectionHistoryController {
     private EmailService emailService;
     @Autowired
     private VaccineService vaccineService;
+
+    @Autowired
+    PatientRepository patientRepository;
+
+    @Autowired
+    VaccineRepository vaccineRepository;
+
+    @Autowired
+    AccountRepository accountRepository;
 
     //    Quân
     @GetMapping("/injection-list")
@@ -89,6 +111,37 @@ public class InjectionHistoryController {
         response.put("message", "Đăng kí tiêm chủng theo yêu cầu thành công ! ");
         return new ResponseEntity<>(response, HttpStatus.OK);
 
+    }
+
+    //An
+    @GetMapping("/injection-add-history")
+    public ResponseEntity<InjectionHistory> register(@RequestParam(value = "id") Long id,
+                                                     @RequestParam(value = "vaccineId") Long vaccineId,
+                                                     @RequestParam(value = "accountId") Long accountId,
+                                                     @RequestParam(value = "injectionDate") String injectionDate) {
+        InjectionHistory injectionHistory1 = new InjectionHistory();
+        LocalDate dayNew = LocalDate.parse(injectionDate);
+        LocalTime timenew = LocalTime.now();
+        LocalDateTime dateTime = LocalDateTime.of(dayNew, timenew);
+
+        injectionHistory1.setPatient(patientRepository.findById(id).orElse(null));
+        injectionHistory1.setVaccine(vaccineRepository.findById(vaccineId).orElse(null));
+        injectionHistory1.setAccount(accountRepository.findById(accountId).orElse(null));
+        injectionHistory1.setRegisterType("định kỳ");
+        injectionHistory1.setResponseContent("Chưa xác định");
+        injectionHistory1.setIsInjected("chưa tiêm");
+        injectionHistory1.setInjectionDate(dateTime);
+        injectionHistoryService.save(injectionHistory1);
+        return ResponseEntity.ok(injectionHistory1);
+    }
+
+
+
+    //An
+    @PostMapping("/injection-add")
+    public ResponseEntity<InjectionHistory> addInjectionHistory(@RequestBody InjectionHistory injectionHistory) {
+        injectionHistoryService.save(injectionHistory);
+        return ResponseEntity.ok(injectionHistory);
     }
 
     // Thành Long

@@ -46,6 +46,7 @@ public class InjectionHistoryServiceImpl implements InjectionHistoryService {
     @Override
     public void save(InjectionHistory injectionHistory) {
         injectionHistoryRepository.save(injectionHistory);
+
     }
 
     // Thành Long
