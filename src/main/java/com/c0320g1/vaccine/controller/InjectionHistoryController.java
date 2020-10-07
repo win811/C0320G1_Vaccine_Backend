@@ -22,12 +22,13 @@ import java.util.Random;
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RequestMapping("/api/v1")
 public class InjectionHistoryController {
-
+    //    CREATE BY ANH ĐỨC
     @Autowired
     InjectionHistoryService injectionHistoryService;
     //    CREATE BY ANH ĐỨC
     @Autowired
     private PatientService patientService;
+    //    CREATE BY ANH ĐỨC
     @Autowired
     private VerifyTokenService verifyTokenService;
     @Autowired
@@ -46,7 +47,7 @@ public class InjectionHistoryController {
         }
         return ResponseEntity.ok(injectionHistoryDTO);
     }
-
+    //    CREATE BY ANH ĐỨC
     @PostMapping("injection/verify")
     public ResponseEntity<Map<String, Object>> sendToken(@RequestBody String email) throws MessagingException {
         Map<String, Object> response = new HashMap<>();
