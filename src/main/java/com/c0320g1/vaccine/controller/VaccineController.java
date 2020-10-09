@@ -1,6 +1,7 @@
 package com.c0320g1.vaccine.controller;
 import com.c0320g1.vaccine.dto.VaccineListDTO;
 import com.c0320g1.vaccine.model.Vaccine;
+import com.c0320g1.vaccine.service.Impl.VaccineServiceImpl;
 import com.c0320g1.vaccine.service.VaccineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,12 +10,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders = "*")
-@RestController
+@RestController(value = "vaccine bean của controller")
 @RequestMapping("/api/v1")
 public class VaccineController {
 
     @Autowired
     private VaccineService vaccineService;
+
+//    public VaccineController (VaccineService vaccineService) {
+//        this.vaccineService = vaccineService;
+//    }
 
     // Cường
     @GetMapping("/vaccine-storage")

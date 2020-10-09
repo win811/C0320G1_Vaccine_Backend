@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-@Service
+//@Service
 public class VaccineServiceImpl implements VaccineService {
 
     @Autowired
