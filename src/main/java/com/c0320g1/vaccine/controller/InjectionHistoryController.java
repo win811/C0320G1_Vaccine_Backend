@@ -37,36 +37,36 @@ import java.util.Date;
 public class InjectionHistoryController {
 
     @Autowired
-    InjectionHistoryService injectionHistoryService;
-    //    CREATE BY ANH ĐỨC
-    @Autowired
-    private PatientService patientService;
-    //    CREATE BY ANH ĐỨC
-    @Autowired
-    private VerifyTokenService verifyTokenService;
-    @Autowired
-    private EmailService emailService;
-    @Autowired
-    private VaccineService vaccineService;
+        InjectionHistoryService injectionHistoryService;
+        //    CREATE BY ANH ĐỨC
+        @Autowired
+        private PatientService patientService;
+        //    CREATE BY ANH ĐỨC
+        @Autowired
+        private VerifyTokenService verifyTokenService;
+        @Autowired
+        private EmailService emailService;
+        @Autowired
+        private VaccineService vaccineService;
 
-    @Autowired
-    PatientRepository patientRepository;
+        @Autowired
+        PatientRepository patientRepository;
 
-    @Autowired
-    VaccineRepository vaccineRepository;
+        @Autowired
+        VaccineRepository vaccineRepository;
 
-    @Autowired
-    AccountRepository accountRepository;
+        @Autowired
+        AccountRepository accountRepository;
 
-    //    Quân
-    @GetMapping("/injection-list")
-    public ResponseEntity<Page<InjectionHistoryDTO>> getListInjected(@RequestParam(name = "fullName", defaultValue = "") String fullName,
-                                                                     @RequestParam(name = "injected", defaultValue = "") String injected,
-                                                                     @RequestParam(name = "page", defaultValue = "0") int page) {
-        Page<InjectionHistoryDTO> injectionHistoryDTO = injectionHistoryService.search(fullName, injected, page);
-        if (injectionHistoryDTO.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
+        //    Quân
+        @GetMapping("/injection-list")
+        public ResponseEntity<Page<InjectionHistoryDTO>> getListInjected(@RequestParam(name = "fullName", defaultValue = "") String fullName,
+                @RequestParam(name = "injected", defaultValue = "") String injected,
+        @RequestParam(name = "page", defaultValue = "0") int page) {
+            Page<InjectionHistoryDTO> injectionHistoryDTO = injectionHistoryService.search(fullName, injected, page);
+            if (injectionHistoryDTO.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
         return ResponseEntity.ok(injectionHistoryDTO);
     }
     //    CREATE BY ANH ĐỨC
@@ -130,6 +130,8 @@ public class InjectionHistoryController {
 //        Kiểm tra xem bệnh nhân đã tồn tại hay chưa, nếu chưa sẽ tạo mới bệnh nhân vào database rồi trả về
 
         injectionHistory.setRegisterType("yêu cầu");
+        injectionHistory.setIsInjected("chưa tiêm");
+        injectionHistory.setResponseContent("chưa xác định");
         this.injectionHistoryService.save(injectionHistory);
         response.put("status", HttpStatus.OK);
         response.put("message", "Đăng kí tiêm chủng theo yêu cầu thành công ! ");

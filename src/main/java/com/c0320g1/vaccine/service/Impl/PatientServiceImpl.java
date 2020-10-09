@@ -159,7 +159,9 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Boolean checkCode(String code) {
-        return patientRepository.findByCode(code);
+        Patient patient = patientRepository.findByCode(code);
+        if (patient != null) return true;
+        return false;
     }
 
 
