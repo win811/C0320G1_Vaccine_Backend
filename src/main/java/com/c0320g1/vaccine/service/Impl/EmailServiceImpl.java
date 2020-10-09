@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Service
 public class EmailServiceImpl implements EmailService {
@@ -561,6 +560,7 @@ public class EmailServiceImpl implements EmailService {
         // Prepare message using a Spring helper
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, "UTF-8");
+        mimeMessageHelper.setFrom("Trung Tâm Tiêm Chủng GPS <CGBVN@gmail.com>");
         mimeMessageHelper.setSubject(subject);
         mimeMessageHelper.setTo(to);
         // Create the HTML body using Thymeleaf

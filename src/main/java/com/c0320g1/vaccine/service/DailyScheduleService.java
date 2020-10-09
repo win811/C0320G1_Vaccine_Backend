@@ -10,7 +10,12 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface DailyScheduleService {
+//    Thong
     Page<DailySchedule> findAllBySearch(String nameVaccine, String status, String startDay, String endDay, Pageable pageable);
     List<DailySchedule> findAll();
     Page<InjectionHistory> findAllInject(Long id,String type, Pageable pageable);
+//    An
+    void save(DailySchedule dailySchedule);
+    Page<DailySchedule> findAll(Pageable pageable);
+    DailySchedule findById(long id);
 }

@@ -105,8 +105,8 @@ public class ContactAPI {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     //    CREATE BY ANH ĐỨC
-    @GetMapping("/reply/id")
-    public ResponseEntity<Map<String, Object>> endContact(
+    @GetMapping("/reply/{id}")
+    public ResponseEntity<Map<String, Object>> closeContact(
             @PathVariable("id") Long id
     ) {
         Map<String, Object> response = new HashMap<>();
@@ -120,5 +120,6 @@ public class ContactAPI {
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
+
 
 }
