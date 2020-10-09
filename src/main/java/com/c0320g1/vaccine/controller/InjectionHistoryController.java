@@ -75,7 +75,7 @@ public class InjectionHistoryController {
         Map<String, Object> response = new HashMap<>();
         verifyTokenService.deleteAllByEmail(email);
         Random random = new Random();
-        int number = random.nextInt(999999);
+        int number = random.nextInt(899999)+100000;
         LocalDateTime timNow = LocalDateTime.now();
         VerifyToken verifyToken = new VerifyToken();
         verifyToken.setEmail(email);
@@ -88,6 +88,28 @@ public class InjectionHistoryController {
         response.put("message", "Mã xác nhận đã được gửi về email của bạn, vui lòng kiểm tra email");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+    //    CREATE BY ANH ĐỨC
+    @PostMapping("injection/verifyCode")
+    public ResponseEntity<Map<String, Object>> verifyCode(@RequestBody Patient patient) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            if (!verifyTokenService.checkTokenVerify(patient.getEmail(), patient.getCode())) {
+                response.put("status", HttpStatus.NOT_FOUND);
+                response.put("message", "Mã xác minh không chính xác hoặc đã hết hạn, vui lòng lấy mã xác minh mới");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            response.put("status", HttpStatus.NOT_FOUND);
+            response.put("message", "Mã xác minh không chính xác hoặc đã hết hạn, vui lòng lấy mã xác minh mới");
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+
+        response.put("status", HttpStatus.OK);
+        response.put("message", "Xác minh thành công ");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 
 
     //    CREATE BY ANH ĐỨC
@@ -99,13 +121,14 @@ public class InjectionHistoryController {
             response.put("message", "Vắc xin này không tồn tại ");
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
-        if (!verifyTokenService.checkTokenVerify(injectionHistory.getPatient().getEmail(), injectionHistory.getPatient().getCode())) {
-            response.put("status", HttpStatus.NOT_FOUND);
-            response.put("message", "Mã xác minh không chính xác hoặc đã hết hạn, vui lòng lấy mã xác nhận mới");
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        try {
+            injectionHistory.setPatient(patientService.checkPatient(injectionHistory.getPatient()));
+        } catch (Exception ex
+        ) {
+            System.out.println(ex);
         }
 //        Kiểm tra xem bệnh nhân đã tồn tại hay chưa, nếu chưa sẽ tạo mới bệnh nhân vào database rồi trả về
-        injectionHistory.setPatient(patientService.checkPatient(injectionHistory.getPatient()));
+
         injectionHistory.setRegisterType("yêu cầu");
         this.injectionHistoryService.save(injectionHistory);
         response.put("status", HttpStatus.OK);
