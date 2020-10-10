@@ -5,7 +5,12 @@ import com.c0320g1.vaccine.model.InjectionHistory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface InjectionHistoryService {
+
+    //Cường
+    List<InjectionHistory> findAll();
 
     // Thành Long
     void save (InjectionHistory injectionHistory);
