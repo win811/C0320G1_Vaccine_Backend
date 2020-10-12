@@ -104,13 +104,11 @@ public class InjectionHistoryController {
             response.put("message", "Mã xác minh không chính xác hoặc đã hết hạn, vui lòng lấy mã xác minh mới");
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
-
+        verifyTokenService.deleteAllByEmail(patient.getEmail());
         response.put("status", HttpStatus.OK);
         response.put("message", "Xác minh thành công ");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-
 
     //    CREATE BY ANH ĐỨC
     @PostMapping("injection/registration")
