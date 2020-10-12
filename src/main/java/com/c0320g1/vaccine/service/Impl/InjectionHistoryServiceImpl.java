@@ -11,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class InjectionHistoryServiceImpl implements InjectionHistoryService {
@@ -18,6 +20,12 @@ public class InjectionHistoryServiceImpl implements InjectionHistoryService {
     InjectionHistoryRepository injectionHistoryRepository;
 
     Pageable pageableDefault = PageRequest.of(0, 4);
+
+    //Cường
+    @Override
+    public List<InjectionHistory> findAll() {
+        return this.injectionHistoryRepository.findAll();
+    }
 
     //    Quân
     @Override
