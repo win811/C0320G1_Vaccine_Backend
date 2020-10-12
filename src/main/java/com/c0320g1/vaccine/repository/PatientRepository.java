@@ -19,5 +19,5 @@ public interface PatientRepository extends JpaRepository<Patient, Long>, JpaSpec
     //Thành Long
     Patient findAllByIdAndStatusIsTrue(Long id);
 
-    Boolean findByCode(String code);
+    Patient findByCode(String code);
 }
