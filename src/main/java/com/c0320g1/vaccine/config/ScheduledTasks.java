@@ -33,8 +33,8 @@ public class ScheduledTasks {
             if (injectionDate.getDayOfYear() - todayInYear == 1) {
                 String email = injectionHistory.getAccount().getEmail();
                 String text = "Bạn có lịch tiêm chủng vào ngày " + injectionDate.getDayOfMonth() + " tháng " +
-                        injectionDate.getMonthValue() + " tại trung tâm tiêm chủng vắc xin C0320G1-Center - địa chỉ : " +
-                        "34 Cao Xuân Huy, Khuê trung, Cẩm Lệ, Đà nẵng. Khi đi vui lòng mang theo chứng minh thư, Xin cảm ơn!";
+                        injectionDate.getMonthValue() + " tại trung tâm tiêm chủng vắc xin C0320G1-Center - Địa chỉ : " +
+                        "295 Nguyễn Tất Thành, Đà nẵng. Khi đi vui lòng mang theo chứng minh thư, Xin cảm ơn!";
                 try {
                     this.emailService.sendSimpleHTMLMessage(email,"Thư nhắc tiêm chủng",text);
                     logger.info("Đã gửi mail báo");

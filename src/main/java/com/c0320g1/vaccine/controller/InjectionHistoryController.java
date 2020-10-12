@@ -152,7 +152,7 @@ public class InjectionHistoryController {
         injectionHistory1.setVaccine(vaccineRepository.findById(vaccineId).orElse(null));
         injectionHistory1.setAccount(accountRepository.findById(accountId).orElse(null));
         injectionHistory1.setRegisterType("định kỳ");
-        injectionHistory1.setResponseContent("Chưa xác định");
+        injectionHistory1.setReponseContent("Chưa xác định");
         injectionHistory1.setIsInjected("chưa tiêm");
         injectionHistory1.setInjectionDate(dateTime);
         injectionHistoryService.save(injectionHistory1);

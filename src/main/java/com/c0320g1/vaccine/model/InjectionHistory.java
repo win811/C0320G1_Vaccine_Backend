@@ -26,7 +26,7 @@ public class InjectionHistory {
     private LocalDateTime injectionDate;
 
     @Column(name = "response_content")
-    private String responseContent;
+    private String reponseContent;
 
     @Column(name = "register_type")
     private String registerType;
