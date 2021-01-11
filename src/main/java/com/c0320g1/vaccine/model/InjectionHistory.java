@@ -25,7 +25,7 @@ public class InjectionHistory {
     @Column(name = "injection_date")
     private LocalDateTime injectionDate;
 
-    @Column(name = "reponse_content")
+    @Column(name = "response_content")
     private String responseContent;
 
     @Column(name = "register_type")

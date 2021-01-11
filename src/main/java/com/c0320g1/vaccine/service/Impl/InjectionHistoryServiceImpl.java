@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 
 @Service
@@ -18,28 +19,23 @@ public class InjectionHistoryServiceImpl implements InjectionHistoryService {
     @Autowired
     InjectionHistoryRepository injectionHistoryRepository;
 
-    Pageable pageableDefault = PageRequest.of(0,4);
+    Pageable pageableDefault = PageRequest.of(0, 4);
 
+    //Cường
     @Override
-    public void save(InjectionHistory injectionHistory) {
-        injectionHistoryRepository.save(injectionHistory);
+    public List<InjectionHistory> findAll() {
+        return this.injectionHistoryRepository.findAll();
     }
-
-    @Override
-    public InjectionHistory findById(Long id) {
-        return injectionHistoryRepository.findById(id).orElse(null);
-    }
-
 
     //    Quân
     @Override
     public Page<InjectionHistoryDTO> search(String fullName, String injected, int page) {
-        if(page>0){
-            Pageable pageable = PageRequest.of(--page,4);
-            Page<InjectionHistory> injectionHistories =  injectionHistoryRepository.findByPatient_FullNameContainingAndIsInjectedContainingAndRegisterType(fullName,injected,"Định kỳ",pageable);
+        if (page > 0) {
+            Pageable pageable = PageRequest.of(--page, 4);
+            Page<InjectionHistory> injectionHistories = injectionHistoryRepository.findByPatient_FullNameContainingAndIsInjectedContainingAndRegisterType(fullName, injected, "Định kỳ", pageable);
             return mapEntityPageIntoDtoPage(injectionHistories, InjectionHistoryDTO.class);
         }
-        Page<InjectionHistory> injectionHistories =  injectionHistoryRepository.findByPatient_FullNameContainingAndIsInjectedContainingAndRegisterType(fullName,injected,"Định kỳ",pageableDefault);
+        Page<InjectionHistory> injectionHistories = injectionHistoryRepository.findByPatient_FullNameContainingAndIsInjectedContainingAndRegisterType(fullName, injected, "Định kỳ", pageableDefault);
         return mapEntityPageIntoDtoPage(injectionHistories, InjectionHistoryDTO.class);
     }
 
@@ -50,7 +46,32 @@ public class InjectionHistoryServiceImpl implements InjectionHistoryService {
     }
 
     public <D, T> Page<D> mapEntityPageIntoDtoPage(Page<T> entities, Class<D> dtoClass) {
-       ModelMapper modelMapper = new ModelMapper();
+        ModelMapper modelMapper = new ModelMapper();
         return entities.map(objectEntity -> modelMapper.map(objectEntity, dtoClass));
+    }
+
+    // Thành Long
+    @Override
+    public void save(InjectionHistory injectionHistory) {
+        injectionHistoryRepository.save(injectionHistory);
+
+    }
+
+    // Thành Long
+    @Override
+    public InjectionHistory findById(Long id) {
+        return injectionHistoryRepository.findById(id).orElse(null);
+    }
+
+    // Thành Long
+    @Override
+    public Page<InjectionHistory> findAll(Pageable pageable) {
+        return injectionHistoryRepository.findAll(pageable);
+    }
+
+    // Thành Long
+    @Override
+    public Page<InjectionHistory> findInjectionHistoryByAccountId(Long accountId, Pageable pageable) {
+        return injectionHistoryRepository.findByAccount_Id(accountId, pageable);
     }
 }
